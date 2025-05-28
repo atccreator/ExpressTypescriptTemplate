@@ -1,18 +1,15 @@
 import express from "express";
-import loadEnv from "./config";
+import {serverConfig} from "./config";
+import { pingRouter } from "./routers/ping.router";
 
 
 const app = express();
 
-app.get("/ping", (req, res) => {
-  res.send("PONG");
-});
 
-loadEnv();
-console.log("Environment variables loaded successfully");
+// register all the routers and their cooresponding routes without app server object.
+app.use(pingRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on http://localhost:${process.env.PORT}`);
+app.listen(serverConfig.PORT, () => {
+  console.log(`Server is running on http://localhost:${serverConfig.PORT}`);
   console.log(`Press Ctrl+C to stop the server`);
-  console.log(process.env.SERVER_NAME);
 });

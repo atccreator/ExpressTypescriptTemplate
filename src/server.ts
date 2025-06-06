@@ -6,6 +6,8 @@ import v2Router from "./routers/v2/index.router";
 
 const app = express();
 
+app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded request bodies
 
 // register all the routers and their cooresponding routes without app server object.
 app.use('/api/v1',v1Router);

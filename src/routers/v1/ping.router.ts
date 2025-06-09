@@ -1,5 +1,7 @@
 import { pingHandler } from "../../controllers/ping.controller";
 import express from 'express';
+import { validateRequestBody } from "../../validators";
+import { pingSchema } from "../../validators/ping.validator";
 
 
 const pingRouter = express.Router();
@@ -13,7 +15,7 @@ const pingRouter = express.Router();
 //     next();
 // }
 
-pingRouter.get('/', pingHandler);
+pingRouter.get('/',validateRequestBody(pingSchema), pingHandler);
 pingRouter.get('/:user_id/comments',pingHandler);
 
 pingRouter.get('/health', (req, res) => {

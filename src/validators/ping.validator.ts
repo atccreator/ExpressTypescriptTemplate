@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
 export const pingSchema = z.object({
-    messsage: z.string().min(1, 'Message must be a non-empty string')
+    message: z.string().min(1, 'Message must be a non-empty string')
 })

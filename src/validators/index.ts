@@ -8,11 +8,12 @@ export const validateRequestBody = (schema: AnyZodObject) => {
             console.log('Request body is valid:');
             next();
         }catch (error) {
-            return res.status(400).json({
-                message: 'Invalid request body',
-                success: false,
-                error: error
+            res.status(400).json({
+            message: 'Invalid request body',
+            success: false,
+            error: error
             });  
+            return
         };
     };
 };
@@ -24,11 +25,12 @@ export const validateRequestParams = (schema: AnyZodObject) => {
             console.log('Query params are valid:');
             next();
         }catch (error) {
-            return res.status(400).json({
-                message: 'Invalid query params',
-                success: false,
-                error: error
+            res.status(400).json({
+            message: 'Invalid query params',
+            success: false,
+            error: error
             });  
+            return;
         };
     };
 };

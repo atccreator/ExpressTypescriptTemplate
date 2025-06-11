@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import fs from 'fs';
+import fs from 'fs/promises';
 
-export const pingHandler =  (req :Request, res:Response, next:NextFunction) =>{
+export const pingHandler =  async (req :Request, res:Response, next:NextFunction) : Promise<void> =>{
     
     // console.log('request body:', req.body);// for request body
     // console.log('request query:', req.query);//for query parameters
@@ -12,11 +12,15 @@ export const pingHandler =  (req :Request, res:Response, next:NextFunction) =>{
     //     success: true
     // });
 
-    fs.readFile('sample.txt', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading file:', err);
-            next(err);
-        }
-    });
+    try {
+        await fs.readFile('nonexistentfile.txt');
+        res.status(200).json({
+            message: 'pong',
+            success: true
+        });
+    }catch (error) {
+        next(error); // Pass the error to the custom error handler middleware
+    }
+
 } 
 

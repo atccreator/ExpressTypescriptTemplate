@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-export const genericErrorHandler = (err: any, req:Request, res: Response, next:NextFunction) => {
-    res.status(501).json({
+import { AppError } from '../utils/errors/app.error.js';
+
+export const genericErrorHandler = (err: AppError, req:Request, res: Response, next:NextFunction) => {
+    res.status(err.statusCode).json({
         success: false,
-        message: 'An unexpected error occurred',
+        message: err.message,
     });
 }

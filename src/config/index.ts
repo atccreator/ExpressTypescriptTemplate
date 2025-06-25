@@ -1,5 +1,6 @@
 // This file contain the all the basic configuration logic for app server to work
 import dotenv from "dotenv";
+import logger from "./logger.config";
 
 type ServerConfig = {
     PORT: number;
@@ -9,7 +10,7 @@ type ServerConfig = {
 function loadEnv(){
     dotenv.config();
     // dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
-    console.log("Environment variables loaded successfully");
+    logger.info("Environment variables loaded successfully");
 }
 
 loadEnv();

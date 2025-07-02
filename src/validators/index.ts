@@ -5,12 +5,12 @@ import logger from "../config/logger.config";
 export const validateRequestBody = (schema: AnyZodObject) => {
     return async (req:Request, res:Response, next:NextFunction) => {
         try {
-            logger.info('Validating request body',{correlationId: req.headers['X-Correlation-Id']});
+            logger.info('Validating request body');
             await schema.parseAsync(req.body);
-            logger.info('Request body is valid',{correlationId: req.headers['X-Correlation-Id']});
+            logger.info('Request body is valid');
             next();
         }catch (error) {
-            logger.error('Invalid request body',{correlationId: req.headers['X-Correlation-Id']});
+            logger.error('Invalid request body');
             res.status(400).json({
             message: 'Invalid request body',
             success: false,

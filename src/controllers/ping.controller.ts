@@ -7,7 +7,7 @@ export const pingHandler =  async (req :Request, res:Response, next:NextFunction
     
     try {
         // await fs.readFile('nonexistentfile.txt');
-        logger.info('Ping request received',{correlationId: req.headers['X-Correlation-Id']});
+        logger.info('Ping request received');
         res.status(200).json({
             message: 'pong',
             success: true
